@@ -1,11 +1,10 @@
 import { fetchUserData, fetchUserMapStats } from "./api/esplayApi.js";
 import { calculateBestMap } from "./helpers/mapStatsHelper.js";
-import { observeDOM } from "./dom/domObserver.js";
+import { observeDOM, aaccept } from "./dom/domObserver.js";
 import { addStyledElement } from "./dom/domUpdater.js";
 
 (function () {
   console.log("Content script is running!");
-
   // Wait for the DOM to load
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", onDOMContentLoaded);
@@ -13,12 +12,13 @@ import { addStyledElement } from "./dom/domUpdater.js";
     onDOMContentLoaded();
   }
 
+  aaccept()
+
+
   function onDOMContentLoaded() {
     console.log("DOMContentLoaded event fired.");
-
     const selector = "#main > div > div.root-topbar.border-b > div > div.flex.grow-0.items-center.gap-x-2.pr-2";
     const targetElement = document.querySelector(selector);
-
     if (targetElement) {
       addStyledElement(targetElement);
     } else {
